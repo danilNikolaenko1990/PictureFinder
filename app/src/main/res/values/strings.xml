@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Picture finder</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="images_tab_name">Images</string>
+    <string name="users_tab_name">users</string>
+    <string name="images">images</string>
+    <string name="users">users</string>
+</resources>

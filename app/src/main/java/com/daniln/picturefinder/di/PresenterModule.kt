@@ -1,24 +1,16 @@
 package com.daniln.picturefinder.di
 
-import android.content.Context
-import com.daniln.picturefinder.network.ImagesRepo
+import com.daniln.picturefinder.network.ImagesFetcher
 import com.daniln.picturefinder.presenters.ImagePresenter
 import com.daniln.picturefinder.presenters.UserPresenter
-import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 
 @Module
 class PresenterModule {
     @Provides
-    fun provideImagePresenter(images: ImagesRepo): ImagePresenter = ImagePresenter(images)
+    fun provideImagePresenter(imagesFetcher: ImagesFetcher): ImagePresenter = ImagePresenter(imagesFetcher)
 
     @Provides
     fun provideUserPresenter(): UserPresenter = UserPresenter()
-
-    @Provides
-    fun provideRepo(chuck: ChuckInterceptor) = ImagesRepo(chuck)
-
-    @Provides
-    fun provideChuck(context: Context) = ChuckInterceptor(context)
 }

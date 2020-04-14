@@ -1,15 +1,14 @@
 package com.daniln.picturefinder.network
 
-import kotlinx.coroutines.Deferred
-import retrofit2.Response
+import com.daniln.picturefinder.network.imageResponse.Resp
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Images {
-    @GET("/search/users")
-    suspend fun getImagesAsync(
+interface UnsplashService {
+    @GET("/search/photos")
+    suspend fun searchPhotos(
         @Query("query") method: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): List<ImageModel>
+    ): Resp
 }

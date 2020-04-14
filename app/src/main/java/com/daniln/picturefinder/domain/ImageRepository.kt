@@ -1,5 +1,5 @@
 package com.daniln.picturefinder.domain
 
 interface ImageRepository {
-    fun searchImages(text: String, pageNumber: Int)
+    suspend fun getImages(query: String, page: Int, perPage: Int): List<Image>
 }

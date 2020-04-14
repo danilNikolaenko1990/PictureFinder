@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/imagesFragment"
     tools:context=".ui.fragments.ImagesFragment">
 
-    <TextView
-        android:id="@+id/tv_counter"
+    <ProgressBar
+        android:id="@+id/ProgressBarLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:theme="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvElements"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:text="images"
-        tools:text="@string/hello_blank_fragment" />
+        android:scrollbars="vertical" />
 </FrameLayout>

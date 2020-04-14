@@ -1,5 +1,6 @@
 package com.daniln.picturefinder.network
 
+import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -23,6 +24,7 @@ suspend fun <T> safeApiCall(
                     ResultWrapper.GenericError(code, errorResponse)
                 }
                 else -> {
+                    Log.e("HTTP_ERR", throwable.toString())
                     ResultWrapper.GenericError(null, null)
                 }
             }

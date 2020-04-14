@@ -10,7 +10,7 @@ import moxy.presenterScope
 class UserPresenter () :
     MvpPresenter<ImagesView>() {
     fun searchImages() {
-        viewState.startLoading()
+        viewState.loadingStarted()
         presenterScope.launch(Dispatchers.Main) {
             val words =
                 withContext(Dispatchers.IO) {

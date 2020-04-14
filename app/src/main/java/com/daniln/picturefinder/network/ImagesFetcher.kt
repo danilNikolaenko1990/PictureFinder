@@ -1,6 +1,6 @@
 package com.daniln.picturefinder.network
 
-import com.daniln.picturefinder.domain.Image
+import com.daniln.picturefinder.domain.ImageGalleryItem
 import com.daniln.picturefinder.domain.ImageRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -8,13 +8,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ImagesFetcher constructor(private val client: UnsplashService) : ImageRepository {
-    override suspend fun getImages(query: String, page: Int, perPage: Int): List<Image> {
+    override suspend fun getImages(query: String, page: Int, perPage: Int): List<ImageGalleryItem> {
         val result = client.searchPhotos(query, page, perPage)
-        val imagesToReturn: ArrayList<Image> = ArrayList()
+        val imagesToReturn: ArrayList<ImageGalleryItem> = ArrayList()
 
         for (imageItem in result.results) {
             imagesToReturn.add(
-                Image(
+                ImageGalleryItem(
                     imageItem.urls.thumb,
                     imageItem.alt_description,
                     imageItem.likes,

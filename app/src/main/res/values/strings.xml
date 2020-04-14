@@ -7,4 +7,5 @@
     <string name="users_tab_name">users</string>
     <string name="images">images</string>
     <string name="users">users</string>
+    <string name="loading_failed">loading failed</string>
 </resources>

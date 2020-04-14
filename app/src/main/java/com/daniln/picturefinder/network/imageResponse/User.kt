@@ -8,7 +8,7 @@ data class User(
     val instagram_username: String,
     val last_name: String,
     val links: LinksXX,
-    val location: String,
+    val location: String?,
     val name: String,
     val portfolio_url: String,
     val profile_image: ProfileImage,

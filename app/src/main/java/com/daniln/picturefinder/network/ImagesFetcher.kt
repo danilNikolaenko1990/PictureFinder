@@ -18,8 +18,8 @@ class ImagesFetcher constructor(private val client: UnsplashService) : ImageRepo
                     imageItem.urls.thumb,
                     imageItem.alt_description,
                     imageItem.likes,
-                    imageItem.user.location,
-                    imageItem.user.username
+                    imageItem.user?.location,
+                    imageItem.user?.username
                 )
             )
         }

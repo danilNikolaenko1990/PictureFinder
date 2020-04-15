@@ -4,24 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
 import com.daniln.AndroidApplication
 import com.daniln.picturefinder.R
 import com.daniln.picturefinder.domain.ImageGalleryItem
 import com.daniln.picturefinder.presenters.ImagePresenter
-import com.daniln.picturefinder.ui.adapters.ImageViewHolder
 import com.daniln.picturefinder.ui.adapters.ImagesAdapter
 import com.daniln.picturefinder.ui.views.ImagesView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_images.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class ImagesFragment : MvpAppCompatFragment(), ImagesView, ImageViewHolder.OnImageListener {
+class ImagesFragment : MvpAppCompatFragment(), ImagesView {
     @Inject
     @InjectPresenter
     lateinit var imagePresenter: ImagePresenter
@@ -47,7 +44,7 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView, ImageViewHolder.OnIma
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        rvElements.layoutManager = GridLayoutManager(activity, 3)
+        rvElements.layoutManager = GridLayoutManager(activity, 2)
 
         rvElements.adapter = mImageAdapter
         rvElements.isVerticalScrollBarEnabled = true
@@ -60,8 +57,11 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView, ImageViewHolder.OnIma
     }
 
     override fun loadingFailed() {
-        Snackbar.make(imagesFragment, R.string.loading_failed, Snackbar.LENGTH_LONG)
-            .show()
+        val toast = Toast.makeText(
+            context,
+            R.string.loading_failed, Toast.LENGTH_LONG
+        )
+        toast.show()
     }
 
     override fun loadingFinished() {
@@ -70,10 +70,6 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView, ImageViewHolder.OnIma
 
     override fun loadingStarted() {
         ProgressBarLoading.visibility = View.VISIBLE
-    }
-
-    override fun open(position: Int) {
-        TODO("Not yet implemented")
     }
 
     companion object {

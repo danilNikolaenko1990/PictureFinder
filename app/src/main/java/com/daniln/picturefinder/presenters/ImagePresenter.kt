@@ -1,6 +1,5 @@
 package com.daniln.picturefinder.presenters
 
-import android.util.Log
 import com.daniln.picturefinder.domain.ImageGalleryItem
 import com.daniln.picturefinder.domain.ImageRepository
 import com.daniln.picturefinder.network.ResultWrapper
@@ -19,7 +18,7 @@ class ImagePresenter(private val repository: ImageRepository) :
         presenterScope.launch(Dispatchers.Main) {
             val result =
                 safeApiCall(Dispatchers.IO) {
-                    repository.getImages("nas", 1, 10)
+                    repository.getImages("cat", 1, 100)
                 }
 
             when (result) {
@@ -36,7 +35,6 @@ class ImagePresenter(private val repository: ImageRepository) :
     }
 
     private fun showNetworkError() {
-//        Log.e("TAG", err.toString())
         viewState.loadingFailed()
     }
 }

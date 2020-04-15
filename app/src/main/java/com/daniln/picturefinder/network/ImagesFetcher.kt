@@ -1,30 +1,40 @@
 package com.daniln.picturefinder.network
 
+import com.daniln.picturefinder.domain.DataFetchingProblemException
 import com.daniln.picturefinder.domain.ImageGalleryItem
 import com.daniln.picturefinder.domain.ImageRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class ImagesFetcher constructor(private val client: UnsplashService) : ImageRepository {
     override suspend fun getImages(query: String, page: Int, perPage: Int): List<ImageGalleryItem> {
-        val result = client.searchPhotos(query, page, perPage)
         val imagesToReturn: ArrayList<ImageGalleryItem> = ArrayList()
 
-        for (imageItem in result.results) {
-            imagesToReturn.add(
-                ImageGalleryItem(
-                    imageItem.urls.thumb,
-                    imageItem.alt_description,
-                    imageItem.likes,
-                    imageItem.user?.location,
-                    imageItem.user?.username
-                )
-            )
-        }
+        try {
+            val result = client.searchPhotos(query, page, perPage)
 
-        return imagesToReturn
+            for (imageItem in result.results) {
+                imagesToReturn.add(
+                    ImageGalleryItem(
+                        imageItem.urls.thumb,
+                        imageItem.alt_description,
+                        imageItem.likes,
+                        imageItem.user?.location,
+                        imageItem.user?.username
+                    )
+                )
+            }
+
+            return imagesToReturn
+        } catch (e: IOException) {
+            throw DataFetchingProblemException(e)
+        } catch (e: HttpException) {
+            throw DataFetchingProblemException(e)
+        }
     }
 }
 

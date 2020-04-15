@@ -2,8 +2,8 @@ package com.daniln.picturefinder.presenters
 
 import com.daniln.picturefinder.domain.ImageGalleryItem
 import com.daniln.picturefinder.domain.ImageRepository
-import com.daniln.picturefinder.network.ResultWrapper
-import com.daniln.picturefinder.network.safeApiCall
+import com.daniln.picturefinder.domain.ResultWrapper
+import com.daniln.picturefinder.domain.callWithWrappedResult
 import com.daniln.picturefinder.ui.views.ImagesView
 import kotlinx.coroutines.*
 import moxy.InjectViewState
@@ -17,13 +17,12 @@ class ImagePresenter(private val repository: ImageRepository) :
         viewState.loadingStarted()
         presenterScope.launch(Dispatchers.Main) {
             val result =
-                safeApiCall(Dispatchers.IO) {
+                callWithWrappedResult(Dispatchers.IO) {
                     repository.getImages("cat", 1, 100)
                 }
 
             when (result) {
-                is ResultWrapper.NetworkError -> showNetworkError()
-                is ResultWrapper.GenericError -> showNetworkError()
+                is ResultWrapper.Error -> showError()
                 is ResultWrapper.Success<List<ImageGalleryItem>> -> showSuccess(result.value)
             }
         }
@@ -34,7 +33,7 @@ class ImagePresenter(private val repository: ImageRepository) :
         viewState.show(images)
     }
 
-    private fun showNetworkError() {
+    private fun showError() {
         viewState.loadingFailed()
     }
 }

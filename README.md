@@ -8,4 +8,4 @@ Simple application to show Clean architecture approach.
 * For navigation between fragments used Navigation component by Google. 
 
 The goal of this sample was illustrate how to use Dagger2 with Retsrofit2 and courutines, because there were many examples 
-how to use retrofit and RxJava but I didn't find any example how to use Retrofit and courutines according to "Clean architecture" recommendations.
+how to use retrofit and RxJava but I didn't find any examples how to use Retrofit and courutines according to "Clean architecture" recommendations.

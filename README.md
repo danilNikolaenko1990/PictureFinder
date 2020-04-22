@@ -16,5 +16,5 @@ If you want to run application by yourself just find file TokenInterceptor.kt an
 The application uses unsplash images api. 
 
 <p align="center">
-  <img src="docs/images/Screenshot.png" >
+  <img src="docs/images/picturefinderscreenplay.gif" width=300>
 </p>

@@ -1,5 +1,5 @@
 # PictureFinder
-Simple application to illustrate Clean architecture approach. 
+Simple application to show Clean architecture approach. 
 * For MVP implementation used Moxy. 
 * For network requests used Retrofit2 + Gson
 * For background requests used Kotlin courutines

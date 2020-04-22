@@ -4,8 +4,8 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 class TokenInterceptor : Interceptor {
-//    todo get token from another place
-    var authToken = "Client-ID p1q70LZTYFVwtxi_e64BaoQBtDj9Xxv38SOChFBHqHY"
+    //put your unsplash api token here
+    var authToken = "put your unsplash api token here"
     override fun intercept(chain: Interceptor.Chain): Response {
         return chain.proceed(
             chain

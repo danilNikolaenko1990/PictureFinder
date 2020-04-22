@@ -13,12 +13,12 @@ import moxy.presenterScope
 @InjectViewState
 class ImagePresenter(private val repository: ImageRepository) :
     MvpPresenter<ImagesView>() {
-    fun searchImages() {
+    fun searchImages(searchText: String) {
         viewState.loadingStarted()
         presenterScope.launch(Dispatchers.Main) {
             val result =
                 callWithWrappedResult(Dispatchers.IO) {
-                    repository.getImages("cat", 1, 100)
+                    repository.getImages(searchText, 1, 100)
                 }
 
             when (result) {

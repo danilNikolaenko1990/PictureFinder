@@ -1,9 +1,10 @@
 package com.daniln.picturefinder.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.daniln.AndroidApplication
@@ -31,6 +32,7 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity?.application as AndroidApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
     }
 
@@ -38,16 +40,40 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        imagePresenter.searchImages()
-
         return inflater.inflate(R.layout.fragment_images, container, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.top_menu, menu);
+
+        val searchItem = menu.findItem(R.id.menu_item_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                hideKeyboard()
+                query?.let {
+                    imagePresenter.searchImages(it)
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    imagePresenter.searchImages(it)
+                }
+                return true
+            }
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         rvElements.layoutManager = GridLayoutManager(activity, 2)
-
         rvElements.adapter = mImageAdapter
         rvElements.isVerticalScrollBarEnabled = true
+        setHasOptionsMenu(true)
 
         super.onActivityCreated(savedInstanceState)
     }
@@ -76,6 +102,15 @@ class ImagesFragment : MvpAppCompatFragment(), ImagesView {
         fun newInstance(): ImagesFragment {
 
             return ImagesFragment()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val view = activity!!.currentFocus
+        if (view != null) {
+            val imm =
+                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

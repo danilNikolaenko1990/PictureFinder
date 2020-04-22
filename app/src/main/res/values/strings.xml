@@ -9,4 +9,6 @@
     <string name="users">users</string>
     <string name="loading_failed">loading failed</string>
     <string name="unknown">unknown</string>
+    <string name="search">search</string>
+    <string name="clear_search">clear search</string>
 </resources>

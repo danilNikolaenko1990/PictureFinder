@@ -9,3 +9,6 @@ Simple application to show Clean architecture approach.
 
 The goal of this sample was illustrate how to use Dagger2 with Retsrofit2 and courutines, because there were many examples 
 how to use retrofit and RxJava but I didn't find any examples how to use Retrofit and courutines according to "Clean architecture" recommendations.
+
+![Screenshot]
+(https://github.com/danilNikolaenko1990/PictureFinder/blob/master/Screenshot.png)
